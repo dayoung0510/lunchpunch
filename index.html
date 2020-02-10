@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lunch Punch</title>
+
+
+  <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="css/site.css" rel="stylesheet">
+
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+
+  <nav class="navbar custom-nav navbar-expand-lg justify-content-center">
+    <!-- <div class="container"> -->
+    <!-- <div class="collapse navbar-collapse" id="navbarResponsive"> -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link custom-link" href="#play">PLAY</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" href="#edit">EDIT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" href="#history">HISTORY</a>
+      </li>
+    </ul>
+    <!-- </div> -->
+    <!-- </div> -->
+  </nav>
+
+
+  <section id="play">
+    <div class="container">
+
+      <!-- 룰렛 -->
+      <div class="row" style="height: 40%;">
+        <div class="col-lg-12">
+          <div class="game-bg flex-center">
+            룰렛
+          </div>
+        </div>
+      </div>
+
+      <!-- 카테고리 -->
+      <div class="row padding-top-05 justify-content-center" style="height: 40%;">
+        <div class="col-lg-12 flex-center" style="height:10%;">
+          <div class="category-title">NEW</div>
+          <div class="category-title">DAILY</div>
+          <div class="category-title">SPECIAL</div>
+        </div>
+
+        <div class="col-lg-12 flex-center" style="height: 90%;">
+          <div class="category">
+            <ul class="category-ul" id="ul-new"></ul>
+          </div>
+          <div class="category">
+            <ul class="category-ul" id="ul-daily"></ul>
+          </div>
+          <div class="category">
+            <ul class="category-ul" id="ul-special"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 담은항목 -->
+      <div class="row" style="height: 19%; padding: 0 1%;">
+        <div class="col-lg-12 basket">
+          <div style="height: 15%;">담은항목</div>
+          <div class="basket-div">
+            <ul class="basket-ul"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <section id="edit">
+    <div class="container">
+
+      <!-- 메뉴추가 -->
+      <div class="row" style="height: 20%;">
+        <div class="col-lg-12 add-menu">
+          <div class="custom-input">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-lightgray dropdown-toggle" type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">CATEGORY</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">NEW</a>
+                  <a class="dropdown-item" href="#">DAILY</a>
+                  <a class="dropdown-item" href="#">SPECIAL</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+              <div class="input-group-append">
+                <button class="btn btn-lightgray btn-outline-secondary" type="button"><i
+                    class="fas fa-check"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 카테고리 -->
+      <div class="row" style="height: 80%;">
+        <div class="col-lg-12 show-menu">
+          <div class="flex-center">
+            <div class="category-title">NEW</div>
+            <div class="category-title">DAILY</div>
+            <div class="category-title">SPECIAL</div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 flex-center" style="height: 90%;">
+          <div class="category">
+            <ul class="category-ul">
+              <li>
+                <span>하나</span>
+                <span><i class="fas fa-times del-icon"></i></span>
+              </li>
+              <li>
+                <span>두우울</span>
+              </li>
+            </ul>
+          </div>
+          <div class="category">
+            <ul class="category-ul">
+              <li>
+                <span>어쩌구</span>
+              </li>
+              <li>
+                <span>저쩌구</span>
+              </li>
+            </ul>
+          </div>
+          <div class="category">
+            <ul class="category-ul">
+              <li>
+                <span>어쩌구</span>
+              </li>
+              <li>
+                <span>저쩌구</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+  <section id="history">
+    <div class="container">
+      <div class="row" style="height: 100%;">
+        <div class="col-lg-12" style="height: 100%;">
+          <div class="flex-end history-title" style="height: 15%;">HISTORY</div>
+          <div class="history" style="height: 75%;">
+
+            <ul class="history-ul">
+              <li>
+                <span class="date">1월30일 목요일</span>
+                <span class="history-menu">어쩌구저쩌구</span>
+              </li>
+              <li>
+                <span class="date">1월30일 수요일</span>
+                <span class="history-menu">어쩌</span>
+              </li>
+              <li>
+                <span class="date">1월3일 화요일</span>
+                <span class="history-menu">어쩌구</span>
+              </li>
+
+
+              <li>
+                <button onclick="createDB()">create DB</button>
+              </li>
+
+              <li>
+                <button onclick="createTable()"> create Table</button>
+              </li>
+
+              <li>
+                <button onclick="insertData()">insert Data</button>
+              </li>
+
+              <li>
+                <button onclick="selectData()">select Data</button>
+              </li>
+
+            </ul>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <script type="text/javascript">
+    // $(document).ready(function () {
+
+
+    //   var menuArray = new Array();
+
+    //   var menuInfo = new Object();
+    //   menuInfo.date = "1월29일";
+    //   menuInfo.name = "카레";
+
+    //   menuArray.push(menuInfo);
+
+
+    //   menuInfo = new Object();
+    //   menuInfo.date = "1월30일";
+    //   menuInfo.name = "햄버거";
+
+    //   menuArray.push(menuInfo);
+
+
+    //   console.log(menuArray);
+    //   console.log(menuArray[1]);
+    //   console.log(menuArray[1].name);
+
+
+
+    // });
+  </script>
+
+
+
+
+<!-- <script>
+
+var db;
+
+function createDB(){
+
+  db = window.openDatabase("myDB","1.0", "테스트용DB", 1024*1024);
+  console.log('create db');
+
+}
+
+
+
+function createTable(){
+
+  db.transaction(function(tx){
+    tx.executeSql("create table Test(id,name)");
+  });
+  console.log('create table');
+}
+
+
+
+function insertData(){
+
+  db.transaction(function(tx){
+    tx.executeSql("insert into Test values(?,?)",[txtID.value,txtName.value]);
+  });
+  console.log('insert Data');
+}
+
+
+
+function selectData(){
+
+  db.transaction(function(tx){
+    tx.executeSql("select * from Test",[],
+
+      function(tx,result){            
+        for(var i = 0; i < result.rows.length; i++){
+          var row = result.rows.item(i);
+          document.getElementById('table1').innerHTML +=  "<tr><td>" + row['id'] + "</td><td>" + row['name'] + "</td></tr>";
+        }            
+      });
+  });
+  console.log('select Data');
+}
+
+
+</script> -->
+
+
+
+<script>
+
+  //메뉴들 json에 담아 변수로 선언
+  var menus = [
+    {category : "new", name : "맘스터치"},
+    {category : "special", name : "수제버거"},
+    {category : "daily", name : "버거킹"},
+    {category : "new", name : "맘스터치22"},
+    {category : "new", name : "맘스터치333"},
+    {category : "special", name : "수제버거22"},
+    {category : "daily", name : "버거킹22"},
+    {category : "daily", name : "버거킹333"},
+    {category : "daily", name : "버거킹4444"}
+  ];
+
+  var menusForGame = [];
+
+
+  //위 변수에 있는 메뉴들 li형태로 보여주기
+  for(var i=0; i<menus.length; i++){
+
+    if(menus[i].category === "new") {
+      $("#ul-new").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
+    }
+
+    else if(menus[i].category === "special") {
+      $("#ul-special").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
+    }
+
+    else{
+      $("#ul-daily").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
+    }
+  }
+
+
+
+
+  //체크박스 클릭 시 발생하는 이벤트
+  $(document).ready(function(){
+
+    //전체 체크박스 변화 감지
+    $('.chk-menu').change(function() {
+
+      //몇 번째 박스가 체크됐는지 확인
+      for(var k=0; k<menus.length; k++){
+        if($("#chk"+k).is(":checked")) {
+
+          //체크된 박스를 menusForGame 어레이에 넣기
+          menusForGame.push(menus[k].name);
+        }
+        else{
+          console.log(k+"번째 체크해제상태");
+        }
+      }
+      
+
+      //menusForGame 어레이에 있는 것들 html '담은항목'에 띄워서 보여주기
+      $(".basket-ul").append("<li>"+ menusForGame +"</li>");
+  })
+
+
+
+
+
+});
+
+
+
+</script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
