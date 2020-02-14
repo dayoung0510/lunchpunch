@@ -98,8 +98,26 @@
       <!-- 메뉴추가 -->
       <div class="row" style="height: 20%;">
         <div class="col-lg-12 add-menu">
-          <div class="custom-input">
-            <div class="input-group mb-3">
+          <div class="input-group-prepend">
+
+            <!-- 드롭다운 -->
+            <select id="drdown-category" class="btn btn-outline-lightgray dropdown-toggle">
+              <option value="new">NEW</option>
+              <option value="daily">DAILY</option>
+              <option value="special">SPECIAL</option>
+            </select>
+          
+            <!-- 입력창 -->
+            <input id="menu-input" type="text" class="form-control">
+
+            <!-- 확인버튼 -->
+            <div class="input-group-append">
+              <button id="add-menu-btn" class="btn btn-lightgray btn-outline-secondary" type="button">
+                <i class="fas fa-check"></i></button>
+            </div>
+          </div>
+
+            <!-- <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <button class="btn btn-outline-lightgray dropdown-toggle" type="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">CATEGORY</button>
@@ -111,11 +129,11 @@
               </div>
               <input type="text" class="form-control" aria-label="Text input with dropdown button">
               <div class="input-group-append">
-                <button class="btn btn-lightgray btn-outline-secondary" type="button"><i
-                    class="fas fa-check"></i></button>
+                <button class="btn btn-lightgray btn-outline-secondary" type="button">
+                  <i class="fas fa-check"></i></button>
               </div>
-            </div>
-          </div>
+            </div> -->
+
         </div>
       </div>
 
@@ -172,27 +190,7 @@
                 <span class="date">1월3일 화요일</span>
                 <span class="history-menu">어쩌구</span>
               </li>
-
-
-              <li>
-                <button onclick="createDB()">create DB</button>
-              </li>
-
-              <li>
-                <button onclick="createTable()"> create Table</button>
-              </li>
-
-              <li>
-                <button onclick="insertData()">insert Data</button>
-              </li>
-
-              <li>
-                <button onclick="selectData()">select Data</button>
-              </li>
-
             </ul>
-
-
 
           </div>
         </div>
@@ -203,60 +201,6 @@
 
 
 
-
-<!-- <script>
-
-var db;
-
-function createDB(){
-
-  db = window.openDatabase("myDB","1.0", "테스트용DB", 1024*1024);
-  console.log('create db');
-
-}
-
-
-
-function createTable(){
-
-  db.transaction(function(tx){
-    tx.executeSql("create table Test(id,name)");
-  });
-  console.log('create table');
-}
-
-
-
-function insertData(){
-
-  db.transaction(function(tx){
-    tx.executeSql("insert into Test values(?,?)",[txtID.value,txtName.value]);
-  });
-  console.log('insert Data');
-}
-
-
-
-function selectData(){
-
-  db.transaction(function(tx){
-    tx.executeSql("select * from Test",[],
-
-      function(tx,result){            
-        for(var i = 0; i < result.rows.length; i++){
-          var row = result.rows.item(i);
-          document.getElementById('table1').innerHTML +=  "<tr><td>" + row['id'] + "</td><td>" + row['name'] + "</td></tr>";
-        }            
-      });
-  });
-  console.log('select Data');
-}
-
-
-</script> -->
-
-
-
 <script>
 
   //메뉴들 json에 담아 변수로 선언
@@ -264,24 +208,28 @@ function selectData(){
     {category : "new", name : "맘스터치"},
     {category : "special", name : "수제버거"},
     {category : "daily", name : "버거킹"},
-    {category : "new", name : "김치찌개"},
-    {category : "new", name : "된장국"},
+    {category : "new", name : "김치찜"},
+    {category : "new", name : "된장찌개"},
     {category : "special", name : "칼국수"},
     {category : "daily", name : "미스터피자"},
     {category : "daily", name : "샐러드"},
-    {category : "daily", name : "치킨"}
+    {category : "daily", name : "치킨"},
+    {category : "daily", name : "카모메"},
+    {category : "daily", name : "김가네"}
   ];
 
 
 
 
-  //위 변수에 있는 메뉴들 li형태로 보여주기
-  for(var i=0; i<menus.length; i++){
+function showList(){
+
+    //위 변수에 있는 메뉴들 li형태로 보여주기
+    for(var i=0; i<menus.length; i++){
 
     if(menus[i].category === "new") {
       //게임 카테고리에 보여주기
       $("#ul-new").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
-      
+  
       //에딧 카테고리에 보여주기
       $("#category-ul-new").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
@@ -296,9 +244,11 @@ function selectData(){
       $("#category-ul-daily").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
 
-
-
   }
+
+}
+
+  showList();
 
 
 
@@ -308,7 +258,6 @@ function selectData(){
   
   //체크박스 클릭 시 발생하는 이벤트
   $(document).ready(function(){
-
 
     //전체 체크박스 변화 감지
     $('.chk-menu').change(function() {
@@ -322,6 +271,7 @@ function selectData(){
 
           //체크된 박스를 menusForGame 어레이에 넣기
           menusForGame.push(" " + menus[k].name + " ");
+          
         }
         else{
         }
@@ -345,12 +295,10 @@ function randomPick() {
   var todayNumber = Math.floor(Math.random()*menusForGame.length);
   var todayMenu = menusForGame[todayNumber];
 
-  if(menusForGame.length === 0)
-  {
+  if(menusForGame.length === 0)  {
     alert("선택된 항목이 없습니다.")
   }
-  else
-  {
+  else  {
     alert("오늘의 메뉴는" + todayMenu + "!");
   }
   
@@ -359,6 +307,31 @@ function randomPick() {
 
 </script>
 
+
+<script>
+
+
+
+  $('#add-menu-btn').click(function() {
+
+    var drdownCat = $('#drdown-category option:selected').val();
+    var inputName = $('#menu-input').val();
+
+    var addJsonMenu = new Object();
+
+    addJsonMenu.category = drdownCat;
+    addJsonMenu.name = inputName;
+
+    menus.push(addJsonMenu);
+
+    // $('.category-ul').empty();
+    showList();
+
+
+
+  })
+
+</script>
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
