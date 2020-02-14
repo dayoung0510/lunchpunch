@@ -104,9 +104,9 @@
                 <button class="btn btn-outline-lightgray dropdown-toggle" type="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">CATEGORY</button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">NEW</a>
-                  <a class="dropdown-item" href="#">DAILY</a>
-                  <a class="dropdown-item" href="#">SPECIAL</a>
+                  <a class="dropdown-item">NEW</a>
+                  <a class="dropdown-item">DAILY</a>
+                  <a class="dropdown-item">SPECIAL</a>
                 </div>
               </div>
               <input type="text" class="form-control" aria-label="Text input with dropdown button">
@@ -132,35 +132,13 @@
 
         <div class="col-lg-12 flex-center" style="height: 90%;">
           <div class="category">
-            <ul class="category-ul">
-              <li>
-                <span>하나</span>
-                <span><i class="fas fa-times del-icon"></i></span>
-              </li>
-              <li>
-                <span>두우울</span>
-              </li>
-            </ul>
+            <ul class="category-ul" id="category-ul-new"></ul>
           </div>
           <div class="category">
-            <ul class="category-ul">
-              <li>
-                <span>어쩌구</span>
-              </li>
-              <li>
-                <span>저쩌구</span>
-              </li>
-            </ul>
+            <ul class="category-ul" id="category-ul-daily"></ul>
           </div>
           <div class="category">
-            <ul class="category-ul">
-              <li>
-                <span>어쩌구</span>
-              </li>
-              <li>
-                <span>저쩌구</span>
-              </li>
-            </ul>
+            <ul class="category-ul" id="category-ul-special"></ul>
           </div>
         </div>
 
@@ -222,38 +200,6 @@
     </div>
   </section>
 
-
-
-
-
-  <script type="text/javascript">
-    // $(document).ready(function () {
-
-
-    //   var menuArray = new Array();
-
-    //   var menuInfo = new Object();
-    //   menuInfo.date = "1월29일";
-    //   menuInfo.name = "카레";
-
-    //   menuArray.push(menuInfo);
-
-
-    //   menuInfo = new Object();
-    //   menuInfo.date = "1월30일";
-    //   menuInfo.name = "햄버거";
-
-    //   menuArray.push(menuInfo);
-
-
-    //   console.log(menuArray);
-    //   console.log(menuArray[1]);
-    //   console.log(menuArray[1].name);
-
-
-
-    // });
-  </script>
 
 
 
@@ -333,15 +279,21 @@ function selectData(){
   for(var i=0; i<menus.length; i++){
 
     if(menus[i].category === "new") {
+      //게임 카테고리에 보여주기
       $("#ul-new").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
+      
+      //에딧 카테고리에 보여주기
+      $("#category-ul-new").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
 
     else if(menus[i].category === "special") {
       $("#ul-special").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
+      $("#category-ul-special").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
 
     else{
       $("#ul-daily").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
+      $("#category-ul-daily").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
 
 
