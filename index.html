@@ -16,6 +16,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+  <!-- 룰렛 -->
+
+
+
+
+
 </head>
 
 <body id="page-top">
@@ -46,11 +52,15 @@
       <!-- 룰렛 -->
       <div class="row" style="height: 40%;">
         <div class="col-lg-12">
-          <div class="game-bg flex-center">
-            <div>
-              <button onclick="randomPick()">시작</button>
-              <div class="todayMenuText"> </div>
-            </div>
+          <div class="game-bg">
+
+            <button onclick="randomPick()">시작</button>
+
+
+
+
+
+
           </div>
         </div>
       </div>
@@ -193,10 +203,21 @@
             </ul>
 
           </div>
+
         </div>
       </div>
     </div>
   </section>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -219,6 +240,8 @@
   ];
 
 
+  var menusForGame = [];
+
 
 
 function showList(){
@@ -227,10 +250,10 @@ function showList(){
     for(var i=0; i<menus.length; i++){
 
     if(menus[i].category === "new") {
-      //게임 카테고리에 보여주기
+      //1단 카테고리에 보여주기
       $("#ul-new").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
   
-      //에딧 카테고리에 보여주기
+      //3단 카테고리에 보여주기
       $("#category-ul-new").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
 
@@ -249,42 +272,40 @@ function showList(){
 }
 
   showList();
+  checkChange();
 
 
 
 
 
-  var menusForGame = [];
+
+
+function checkChange(){
+  //전체 체크박스 변화 감지
+  $('.chk-menu').change(function() {
+
+  //어레이 초기화
+  menusForGame = new Array();
+
+  //몇 번째 박스가 체크됐는지 확인
+  for(var k=0; k<menus.length; k++){ 
+    
+    if($("#chk"+k).is(":checked")) { 
+
+    //체크된 박스를 menusForGame 어레이에 넣기
+    menusForGame.push(" " + menus[k].name + " "); 
+    
+    }
+}
+
+  // 담은항목 li 초기화
+  $(" .basket-ul li").remove(); 
   
-  //체크박스 클릭 시 발생하는 이벤트
-  $(document).ready(function(){
-
-    //전체 체크박스 변화 감지
-    $('.chk-menu').change(function() {
-
-      //어레이 초기화
-      menusForGame = new Array();
-
-      //몇 번째 박스가 체크됐는지 확인
-      for(var k=0; k<menus.length; k++){
-        if($("#chk"+k).is(":checked")) {
-
-          //체크된 박스를 menusForGame 어레이에 넣기
-          menusForGame.push(" " + menus[k].name + " ");
-          
-        }
-        else{
-        }
-      }
-      
-      // 담은항목 li 초기화
-      $(".basket-ul *").remove();
-
-      //어레이에 있는 것들을 li에 담아 보여주기
-      $(".basket-ul").append("<li>"+ menusForGame +"</li>");
+  //어레이에 있는 것들을 li에 담아 보여주기 
+  $(".basket-ul").append("<li>"+ menusForGame +"</li>");
   })
+}
 
-});
 
 
 
@@ -319,19 +340,31 @@ function randomPick() {
 
     var addJsonMenu = new Object();
 
+    //input에 입력한 걸 제이슨으로 만들기
     addJsonMenu.category = drdownCat;
     addJsonMenu.name = inputName;
 
+
+    //위의 제이슨을 어레이에 새로 넣기
     menus.push(addJsonMenu);
 
-    // $('.category-ul').empty();
+    //1단, 3단 보이는 부분 지워주기
+    $('.category-ul li').remove();
+
+    //1단, 3단 새로 보여주기
     showList();
 
+    //게임 바구니 리셋
+    $(" .basket-ul li").remove(); 
 
+    checkChange();
 
   })
 
 </script>
+
+
+
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -343,6 +376,11 @@ function randomPick() {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
+
+
+
+
+
 </body>
 
 </html>
