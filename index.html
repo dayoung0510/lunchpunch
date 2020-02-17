@@ -17,7 +17,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- 룰렛 -->
-
+  <script type="text/javascript" src="js/Winwheel.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 
 
 
@@ -51,11 +52,35 @@
 
       <!-- 룰렛 -->
       <div class="row" style="height: 40%;">
-        <div class="col-lg-12">
+        <div class="col-lg-12" style="height: 100%;">
           <div class="game-bg">
 
-            <button onclick="randomPick()">시작</button>
+            <!-- <button onclick="randomPick()">시작</button> -->
 
+            <div style="height: 10%;">
+              <button id="spin_button" onClick="startSpin();">시작</button>
+              <button onClick="resetWheel(); return false;">다시하기</button>
+            </div>
+              
+            <div style="height: 90%; position: relative;">
+              <img src="wheel_back.png" style="height: calc(100% - 10px); position: absolute; bottom: 10px; left: 50%; transform:translateX(-50%)">
+              <canvas id="canvas" width="280" height="280" style="position: absolute; top: 9px; left: 50%; transform:translateX(-50%)"></canvas>
+            </div>
+          
+
+            <!-- <div class="the_wheel" style="height: 100%;">
+              <canvas id="canvas" width="434" height="434"></canvas>
+            </div> -->
+
+
+            <!-- <div class="power_controls">
+              <button id="spin_button" onClick="startSpin();">시작</button>
+              <button onClick="resetWheel(); return false;">다시하기</button>
+            </div>
+             -->
+                <!-- <div width="438" height="582" class="the_wheel">
+                  <canvas id="canvas" width="434" height="434"></canvas>
+                </div> -->
 
 
 
@@ -127,22 +152,6 @@
             </div>
           </div>
 
-            <!-- <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-lightgray dropdown-toggle" type="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">CATEGORY</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">NEW</a>
-                  <a class="dropdown-item">DAILY</a>
-                  <a class="dropdown-item">SPECIAL</a>
-                </div>
-              </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
-              <div class="input-group-append">
-                <button class="btn btn-lightgray btn-outline-secondary" type="button">
-                  <i class="fas fa-check"></i></button>
-              </div>
-            </div> -->
 
         </div>
       </div>
@@ -184,6 +193,13 @@
     <div class="container">
       <div class="row" style="height: 100%;">
         <div class="col-lg-12" style="height: 100%;">
+
+
+
+
+
+
+
           <div class="flex-end history-title" style="height: 15%;">HISTORY</div>
           <div class="history" style="height: 75%;">
 
@@ -204,14 +220,15 @@
 
           </div>
 
+
+
+
+
+
         </div>
       </div>
     </div>
   </section>
-
-
-
-
 
 
 
@@ -253,6 +270,7 @@ function showList(){
       //1단 카테고리에 보여주기
       $("#ul-new").append("<li> <input type='checkbox' class='chk-menu' id= chk" + i + "> <span>" + menus[i].name + "</span> </li>");
   
+
       //3단 카테고리에 보여주기
       $("#category-ul-new").append("<li>" + "<span>" + menus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
     }
@@ -273,7 +291,6 @@ function showList(){
 
   showList();
   checkChange();
-
 
 
 
@@ -311,25 +328,20 @@ function checkChange(){
 
 
 // 어레이 항목 중 하나를 랜덤 추출하는 함수
-function randomPick() {
+// function randomPick() {
 
-  var todayNumber = Math.floor(Math.random()*menusForGame.length);
-  var todayMenu = menusForGame[todayNumber];
+//   var todayNumber = Math.floor(Math.random()*menusForGame.length);
+//   var todayMenu = menusForGame[todayNumber];
 
-  if(menusForGame.length === 0)  {
-    alert("선택된 항목이 없습니다.")
-  }
-  else  {
-    alert("오늘의 메뉴는" + todayMenu + "!");
-  }
+//   if(menusForGame.length === 0)  {
+//     alert("선택된 항목이 없습니다.")
+//   }
+//   else  {
+//     alert("오늘의 메뉴는" + todayMenu + "!");
+//   }
   
-}
+// }
 
-
-</script>
-
-
-<script>
 
 
 
@@ -362,6 +374,73 @@ function randomPick() {
   })
 
 </script>
+
+
+
+
+
+
+<script>
+  let theWheel = new Winwheel({
+      'numSegments'  : 8,
+      'outerRadius'  : 112,
+      'textFontSize' : 14,
+      'segments'     : 
+      [
+         {'fillStyle' : '#eae56f', 'text' : 'Prize 1'},
+         {'fillStyle' : '#89f26e', 'text' : 'Prize 2'},
+         {'fillStyle' : '#7de6ef', 'text' : 'Prize 3'},
+         {'fillStyle' : '#e7706f', 'text' : 'Prize 4'},
+         {'fillStyle' : '#eae56f', 'text' : 'Prize 5'},
+         {'fillStyle' : '#89f26e', 'text' : 'Prize 6'},
+         {'fillStyle' : '#7de6ef', 'text' : 'Prize 7'},
+         {'fillStyle' : '#e7706f', 'text' : 'Prize 8'}
+      ],
+      'animation' :           // Specify the animation to use.
+      {
+          'type'     : 'spinToStop',
+          'duration' : 5,     // Duration in seconds.
+          'spins'    : 8,     // Number of complete spins.
+          'callbackFinished' : alertPrize
+      }
+  });
+
+  // Vars used by the code in this page to do power controls.
+  let wheelPower    = 0;
+  let wheelSpinning = false;
+
+
+
+ 
+  function startSpin()
+  {
+      // Ensure that spinning can't be clicked again while already running.
+      if (wheelSpinning == false) {
+
+          theWheel.startAnimation();
+          // wheelSpinning = true;
+      }
+  }
+
+  function resetWheel()
+  {
+      theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+      theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+      theWheel.draw();                // Call draw to render changes to the wheel.
+
+      wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+  }
+
+
+  function alertPrize(indicatedSegment)
+  {
+      alert("오늘의 메뉴는 " + indicatedSegment.text);
+      wheelSpinning = false;
+  }
+</script>
+
+
+
 
 
 
