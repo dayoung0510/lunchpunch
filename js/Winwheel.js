@@ -40,19 +40,19 @@ function Winwheel(options, drawWheel)
         'numSegments'       : 1,            // The number of segments. Need at least one to draw.
         'drawMode'          : 'code',       // The draw mode. Possible values are 'code', 'image', 'segmentImage'. Default is code which means segments are drawn using canvas arc() function.
         'rotationAngle'     : 0,            // The angle of rotation of the wheel - 0 is 12 o'clock position.
-        'textFontFamily'    : 'Arial',      // Segment text font, you should use web safe fonts.
+        'textFontFamily'    : 'silgothic',      // Segment text font, you should use web safe fonts.
         'textFontSize'      : 20,           // Size of the segment text.
         'textFontWeight'    : '400',       // Font weight.
         'textOrientation'   : 'horizontal', // Either horizontal, vertical, or curved.
         'textAlignment'     : 'center',     // Either center, inner, or outer.
         'textDirection'     : 'normal',     // Either normal or reversed. In normal mode for horizontal text in segment at 3 o'clock is correct way up, in reversed text at 9 o'clock segment is correct way up.
         'textMargin'        : null,         // Margin between the inner or outer of the wheel (depends on textAlignment).
-        'textFillStyle'     : '#222',      // This is basically the text colour.
+        'textFillStyle'     : '#fff',      // This is basically the text colour.
         'textStrokeStyle'   : null,         // Basically the line colour for segment text, only looks good for large text so off by default.
         'textLineWidth'     : 1,            // Width of the lines around the text. Even though this defaults to 1, a line is only drawn if textStrokeStyle specified.
         'fillStyle'         : 'silver',     // The segment background colour.
-        'strokeStyle'       : 'null',      // Segment line colour. Again segment lines only drawn if this is specified.
-        'lineWidth'         : 1,            // Width of lines around segments.
+        'strokeStyle'       : 'transparent',      // Segment line colour. Again segment lines only drawn if this is specified.
+        'lineWidth'         : 0,            // Width of lines around segments.
         'clearTheCanvas'    : true,         // When set to true the canvas will be cleared before the wheel is drawn.
         'imageOverlay'      : false,        // If set to true in image drawing mode the outline of the segments will be displayed over the image. Does nothing in code drawMode.
         'drawText'          : true,         // By default the text of the segments is rendered in code drawMode and not in image drawMode.

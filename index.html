@@ -63,8 +63,18 @@
             </div>
               
             <div style="height: 90%; position: relative;">
+              <!-- 룰렛 받침대 -->
               <img src="wheel_back.png" style="height: calc(100% - 10px); position: absolute; bottom: 10px; left: 50%; transform:translateX(-50%)">
+              
+              <!-- 룰렛 원판 -->
               <canvas id="canvas" width="280" height="280" style="position: absolute; top: 9px; left: 50%; transform:translateX(-50%)"></canvas>
+
+              <!-- 모달 -->
+              <!-- <div id="resultModal" class="my-modal">
+                <div class="search-modal-content" style="height:300px; background-color: rgba(201, 226, 138, 0.3);">
+                  <p>모달이다.</p>
+                </div>
+              </div> -->
             </div>
           
 
@@ -311,7 +321,10 @@ function checkChange(){
 
     //체크된 박스를 menusForGame 어레이에 넣기
     menusForGame.push(" " + menus[k].name + " "); 
-    
+
+    //게임 룰렛에 항목 들어가게 하기
+    rouletteSetting();
+
     }
 }
 
@@ -320,7 +333,10 @@ function checkChange(){
   
   //어레이에 있는 것들을 li에 담아 보여주기 
   $(".basket-ul").append("<li>"+ menusForGame +"</li>");
+
   })
+
+  
 }
 
 
@@ -371,6 +387,7 @@ function checkChange(){
 
     checkChange();
 
+
   })
 
 </script>
@@ -381,44 +398,105 @@ function checkChange(){
 
 
 <script>
-  let theWheel = new Winwheel({
-      'numSegments'  : 8,
-      'outerRadius'  : 112,
-      'textFontSize' : 14,
-      'segments'     : 
-      [
-         {'fillStyle' : '#eae56f', 'text' : 'Prize 1'},
-         {'fillStyle' : '#89f26e', 'text' : 'Prize 2'},
-         {'fillStyle' : '#7de6ef', 'text' : 'Prize 3'},
-         {'fillStyle' : '#e7706f', 'text' : 'Prize 4'},
-         {'fillStyle' : '#eae56f', 'text' : 'Prize 5'},
-         {'fillStyle' : '#89f26e', 'text' : 'Prize 6'},
-         {'fillStyle' : '#7de6ef', 'text' : 'Prize 7'},
-         {'fillStyle' : '#e7706f', 'text' : 'Prize 8'}
-      ],
-      'animation' :           // Specify the animation to use.
-      {
-          'type'     : 'spinToStop',
-          'duration' : 5,     // Duration in seconds.
-          'spins'    : 8,     // Number of complete spins.
-          'callbackFinished' : alertPrize
-      }
+
+  $(document).ready(function(){
+  rouletteSetting();
+  let theWheel;
+
+  })
+
+
+
+
+  function rouletteSetting(){
+
+  theWheel = new Winwheel({
+
+  'numSegments' : menusForGame.length,
+  'outerRadius' : 112,
+  'textFontSize' : 14,
+  'segments' : addTowheel(),
+  // [
+  //   {'fillStyle' : '#212121', 'text' : menusForGame[0]},
+  //   {'fillStyle' : '#424242', 'text' : menusForGame[1]},
+  //   {'fillStyle' : '#212121', 'text' : menusForGame[2]},
+  //   {'fillStyle' : '#424242', 'text' : menusForGame[3]},
+  //   {'fillStyle' : '#212121', 'text' : menusForGame[4]}
+  // ],
+  'animation' :
+  {
+  'type' : 'spinToStop',
+  'duration' : 2, // Duration in seconds.
+  'spins' : 8, // Number of complete spins.
+  'callbackFinished' : alertPrize
+  }
   });
 
-  // Vars used by the code in this page to do power controls.
-  let wheelPower    = 0;
-  let wheelSpinning = false;
+  }
 
+
+
+  
+//룰렛 안 컬러 설정(3가지)
+var colorArray = [];
+
+    for(var i=0; i<30; i++){
+
+      //i나누기3의 나머지가 0일 때
+      if(i%3 === 0){
+        colorArray.push('#111111');
+      }
+
+      //i나누기3의 나머지가 1일 때
+      else if(i%3 === 1){
+        colorArray.push('#555555');
+      }
+
+      else if(i%3 === 2){
+        colorArray.push('#999999');
+      }
+
+    }
+
+
+
+
+
+
+  function addTowheel(){
+
+    ar = new Array();
+
+    for (var i=0; i<menusForGame.length; i++){
+      json = new Object();
+      // json.fillStyle = '#' + Math.round(Math.random()*0xffffff).toString(16);
+      json.fillStyle = colorArray[i];
+      json.text = menusForGame[i];
+
+      ar.push(json);
+
+    }
+
+    return ar
+
+}
+
+
+
+  // Vars used by the code in this page to do power controls.
+  let wheelPower = 0;
+  let wheelSpinning = false;
 
 
  
   function startSpin()
   {
-      // Ensure that spinning can't be clicked again while already running.
       if (wheelSpinning == false) {
 
           theWheel.startAnimation();
-          // wheelSpinning = true;
+
+          //결과 나올 때까지 시작버튼 눌러도 더 안돌아가게
+          wheelSpinning = true;
       }
   }
 
@@ -434,7 +512,7 @@ function checkChange(){
 
   function alertPrize(indicatedSegment)
   {
-      alert("오늘의 메뉴는 " + indicatedSegment.text);
+      alert("오늘의 메뉴는" + indicatedSegment.text);
       wheelSpinning = false;
   }
 </script>
