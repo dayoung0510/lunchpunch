@@ -177,13 +177,13 @@ section {
 .history{
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   border: 1px solid #db3d2b;
   margin: 0 3px;
   width: 40%;
   padding: 5% 2%;
   overflow-y: scroll;
   margin: 0 auto;
+  border-radius: .3rem;
 }
 
 .history::-webkit-scrollbar { width: 12px; }

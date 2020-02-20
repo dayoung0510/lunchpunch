@@ -112,20 +112,22 @@ var colorArray = [];
       wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
   }
 
+  var resultText;
 
   function alertPrize(indicatedSegment)
   {
-    var decoText = indicatedSegment.text;
+    resultText = indicatedSegment.text;
 
-    $('#howAbout').append("오늘 점심은 '" +decoText+ "' 어떠세요?");
+    $('#howAbout').append("오늘 점심은 '" +resultText+ "' 어떠세요?");
     showModal();
 
     //휠을 다시 돌릴 수 있게 false로 설정
     wheelSpinning = false;
   }
 
-
-  function sayYes(){
+  var todayMenus = [];
+  
+  function sayYes() {
     hideModal();
     // wheelSpinning = true;
     $('#spin_button').attr('disabled', true);
@@ -134,7 +136,47 @@ var colorArray = [];
     $('#spin_button').css('background-color', '#454545');
     $('#spin_button').css('color', '#fff');
     $('#spin_button').css('border', 'none');
-    console.log('저장로직 실행');
+
+
+    // 저장로직 실행
+    var HISTORY_LS = "todayHisory"
+    var _today = new Date();
+    var formatToday = _today.format('MM월 dd일 (KS)');
+
+
+    var loadedHistory = localStorage.getItem(HISTORY_LS);
+
+    var todayMenusObj = {
+      id: _today.format('MMdd'),
+      date: formatToday,
+      name: resultText
+    }
+
+
+
+
+    //이거 안하면 로컬스토리지에 첫 번째 값이 null로 들어가더라
+    if (loadedHistory !== null) {
+      todayMenus = [];
+      var parsedHistory = JSON.parse(loadedHistory);
+
+      console.log(parsedHistory.length)
+
+      for (var i = 0; i < parsedHistory.length; i++) {
+
+        var historyObj = {
+          id: parsedHistory[i].id,
+          date: parsedHistory[i].date,
+          name: parsedHistory[i].name
+        }
+        todayMenus.push(historyObj);
+      }
+
+    }
+
+    todayMenus.push(todayMenusObj);
+    localStorage.setItem(HISTORY_LS, JSON.stringify(todayMenus));
+    $('#howAbout').empty();
   }
 
   function sayNo(){
@@ -157,4 +199,55 @@ var colorArray = [];
 
   var addWord = $('#menu-input')
 
-  //////////////////////// 룰렛 관련 코드 끝 //////////////
+  //////////////////////// 룰렛 관련 코드 끝 /////////////////////
+
+
+
+  //////////////////////// 히스토리 관련 코드 /////////////////////
+
+  
+
+
+  Date.prototype.format = function (f) {
+
+    if (!this.valueOf()) return " ";
+
+    var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+    var weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
+    var weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var d = this;
+
+
+
+    return f.replace(/(yyyy|yy|MM|dd|KS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
+
+        switch ($1) {
+            case "yyyy": return d.getFullYear(); // 년 (4자리)
+            case "yy": return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
+            case "MM": return (d.getMonth() + 1).zf(2); // 월 (2자리)
+            case "dd": return d.getDate().zf(2); // 일 (2자리)
+            case "KS": return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
+            case "KL": return weekKorName[d.getDay()]; // 요일 (긴 한글)
+            case "ES": return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
+            case "EL": return weekEngName[d.getDay()]; // 요일 (긴 영어)
+            case "HH": return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
+            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
+            case "mm": return d.getMinutes().zf(2); // 분 (2자리)
+            case "ss": return d.getSeconds().zf(2); // 초 (2자리)
+            case "a/p": return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
+
+            default: return $1;
+
+        }
+
+    });
+
+};
+
+
+
+String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
+String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
+Number.prototype.zf = function (len) { return this.toString().zf(len); };
+
