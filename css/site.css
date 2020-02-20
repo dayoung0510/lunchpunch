@@ -83,6 +83,7 @@ section {
   height: 100%;
   padding: 10px;
   overflow-y: scroll;
+  border-radius: .3rem;
 }
 
 .category::-webkit-scrollbar { width: 12px; }
@@ -113,6 +114,7 @@ section {
   background-color: #fff;
   padding: 1%;
   border: 1px dashed #db3d2b;
+  border-radius: .3rem;
 }
 
 .basket-div{
@@ -166,6 +168,7 @@ section {
 .del-icon{
   color: #db3d2b;
   padding: 0 5px;
+  cursor: pointer;
 }
 
 
@@ -253,16 +256,36 @@ section {
   top: 0;
 }
 
+.del-modal{
+  position: absolute;
+  z-index: 9997;
+  /* width: 50%; */
+  background-color: #db3d2b;
+  border: 1px solid #db3d2b;
+  border-radius: .3rem;
+  top: 200%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#really{
+  color: #fff;
+  font-size: 18px;
+}
+
+#deleteModal .modal-text{
+  padding: 40px 30px;
+}
 
 
-.modal-text{
+#resultModal .modal-text{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.howAbout{
+#howAbout{
   color: #fff;
   font-size: 18px;
 }
