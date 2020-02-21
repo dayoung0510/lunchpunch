@@ -2,12 +2,17 @@
 
 ////////////// 룰렛 관련 코드 ///////////////
 
+var _today = new Date();
+
 //문서 시작할 때 룰렛 셋팅
 $(document).ready(function(){
   rouletteSetting();
   let theWheel;
 
-  })
+
+
+  });
+
 
 
 
@@ -94,6 +99,7 @@ var colorArray = [];
  
   function startSpin()
   {
+    
       if (wheelSpinning == false) {
 
           theWheel.startAnimation();
@@ -101,6 +107,10 @@ var colorArray = [];
           //결과 나올 때까지 시작버튼 눌러도 더 안돌아가게
           wheelSpinning = true;
       }
+
+      //아무것도 안골랐을 때 고르라고 알러트
+      //지금은 아무것도 안고른 후> 스타트 누르고> 고르고> 스타트 누르면 안돌아감.. 오류 고치기
+
   }
 
   function resetWheel()
@@ -130,26 +140,26 @@ var colorArray = [];
   function sayYes() {
     hideModal();
     // wheelSpinning = true;
-    $('#spin_button').attr('disabled', true);
-    $('#spin_button').empty();
-    $('#spin_button').text('오늘 게임 끝');
-    $('#spin_button').css('background-color', '#454545');
-    $('#spin_button').css('color', '#fff');
-    $('#spin_button').css('border', 'none');
-
 
     // 저장로직 실행
-    var HISTORY_LS = "todayHisory"
-    var _today = new Date();
+    var HISTORY_LS = "todayHistory"
+    // var _today = new Date();
     var formatToday = _today.format('MM월 dd일 (KS)');
 
 
     var loadedHistory = localStorage.getItem(HISTORY_LS);
 
     var todayMenusObj = {
-      id: _today.format('MMdd'),
+      id: _today.format('yyMMdd'),
       date: formatToday,
       name: resultText
+    }
+
+
+    var parsedHistory = JSON.parse(loadedHistory);
+
+    if(parsedHistory !== null){
+      console.log("마지막날짜: ", parsedHistory[0].id);
     }
 
 
@@ -158,7 +168,7 @@ var colorArray = [];
     //이거 안하면 로컬스토리지에 첫 번째 값이 null로 들어가더라
     if (loadedHistory !== null) {
       todayMenus = [];
-      var parsedHistory = JSON.parse(loadedHistory);
+
 
       console.log(parsedHistory.length)
 
@@ -169,14 +179,29 @@ var colorArray = [];
           date: parsedHistory[i].date,
           name: parsedHistory[i].name
         }
-        todayMenus.push(historyObj);
+
+        todayMenus.unshift(historyObj);
       }
 
     }
 
-    todayMenus.push(todayMenusObj);
+    todayMenus.unshift(todayMenusObj);
     localStorage.setItem(HISTORY_LS, JSON.stringify(todayMenus));
     $('#howAbout').empty();
+    $('.history-ul').empty();
+    loadHistory();
+
+  }
+
+
+
+  function blockButton(){
+    $('#spin_button').attr('disabled', true);
+    $('#spin_button').empty();
+    $('#spin_button').text('오늘 게임 끝');
+    $('#spin_button').css('background-color', '#454545');
+    $('#spin_button').css('color', '#fff');
+    $('#spin_button').css('border', 'none');
   }
 
   function sayNo(){

@@ -219,10 +219,7 @@
           <div class="history" style="height: 75%;">
 
             <ul class="history-ul">
-              <li>
-                <span class="date">1월30일 목요일</span>
-                <span class="history-menu">어쩌구저쩌구</span>
-              </li>
+
             </ul>
 
           </div>
@@ -242,6 +239,7 @@
 
     var MENUS_LS = "menus";
     var menus = [];
+
 
 
 
@@ -314,15 +312,14 @@
         //위의 제이슨을 어레이에 새로 넣기
         menus.push(addJsonMenu);
         saveMenus();
-        init();
-      }
-      
-      else{
-        alert('내용을 입력해주세요.');
-      }
 
       //인풋박스 초기화
       $('#menu-input').val('');
+      console.log("!");
+
+
+        init();
+      }
 
     }
 
@@ -379,14 +376,7 @@
 
     }
 
-    function init(){
-      loadMenus();
-      $('#add-menu-btn').click(addMenus)
-      $('.del-icon').click(deleteMenus);
-      checkChange();
-    }
 
-    init();
 
 
 
@@ -435,6 +425,73 @@ function checkChange(){
 
 }
 
+
+
+
+
+// 히스토리
+
+function loadHistory(){
+
+  var historyDate;
+  var historyName;
+
+  var HistoryforText = localStorage.getItem("todayHistory");
+  var parsedHistoryforText = JSON.parse(HistoryforText);
+  
+  if(HistoryforText !==null){
+    for(var i=0; i<parsedHistoryforText.length; i++){
+
+      historyDate = parsedHistoryforText[i].date;
+      historyName = parsedHistoryforText[i].name;
+
+      $(".history-ul").append('<li><span class="date">' + historyDate + '</span>' + '<span class="history-menu">' + historyName + '</span></li>');
+
+    }
+
+    //게임 하루에 한 번만 하게 설정
+    var a = _today.format('yyMMdd');
+    var b = parsedHistoryforText[0].id;
+
+    if(a === b){
+      blockButton();
+    }
+
+  }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+function init(){
+      loadMenus();
+      $('#add-menu-btn').click(addMenus)
+      $('.del-icon').click(deleteMenus);
+      loadHistory();
+      checkChange();
+    }
+
+    init();
+
+
+    //페이지 부드럽게 이동
+    $("a[href^='#']").click(function(event){
+      event.preventDefault();
+      var target = $(this.hash);
+      $('html, body').animate({scrollTop: target.offset().top}, 400);
+    });
 
 </script>
 
