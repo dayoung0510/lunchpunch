@@ -315,7 +315,6 @@
 
       //인풋박스 초기화
       $('#menu-input').val('');
-      console.log("!");
 
 
         init();
@@ -430,7 +429,6 @@ function checkChange(){
 
 
 // 히스토리
-
 function loadHistory(){
 
   var historyDate;
@@ -439,6 +437,9 @@ function loadHistory(){
   var HistoryforText = localStorage.getItem("todayHistory");
   var parsedHistoryforText = JSON.parse(HistoryforText);
   
+  //히스토리 보이는 부분 초기화
+  $('.history-ul').empty();
+
   if(HistoryforText !==null){
     for(var i=0; i<parsedHistoryforText.length; i++){
 

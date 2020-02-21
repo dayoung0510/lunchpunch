@@ -200,6 +200,7 @@ var colorArray = [];
 
 
 
+  //버튼 클릭 막는 함수
   function blockButton(){
     $('#spin_button').attr('disabled', true);
     $('#spin_button').empty();
@@ -233,7 +234,7 @@ var colorArray = [];
 
 
 
-  //////////////////////// 히스토리 관련 코드 /////////////////////
+  //////////////////////// 날짜 관련 코드 /////////////////////
 
   
 
