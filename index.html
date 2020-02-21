@@ -265,17 +265,17 @@
         $("#ul-new").append("<li> <input type='checkbox' class='chk-menu' id=chk" + i + "> <span>" + parsedMenus[i].name + "</span> </li>");
 
         //EDIT 카테고리에 보여주기
-        $("#category-ul-new").append("<li id=" + newId + ">" + "<span>" + parsedMenus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
+        $("#category-ul-new").append("<li id=" + newId + ">" + "<span>" + parsedMenus[i].name + "</span>" + "<span class='del-span'>" +"<i class='fas fa-times del-icon'>");
         }
 
         else if(parsedMenus[i].category === "special") {
           $("#ul-special").append("<li> <input type='checkbox' class='chk-menu' id=chk" + i + "> <span>" + parsedMenus[i].name + "</span> </li>");
-          $("#category-ul-special").append("<li id=" + newId + ">" + "<span>" + parsedMenus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
+          $("#category-ul-special").append("<li id=" + newId + ">" + "<span>" + parsedMenus[i].name + "</span>" + "<span class='del-span'>" +"<i class='fas fa-times del-icon'>");
         }
 
         else{
           $("#ul-daily").append("<li> <input type='checkbox' class='chk-menu' id=chk" + i + "> <span>" + parsedMenus[i].name + "</span> </li>");
-          $("#category-ul-daily").append("<li id=" + newId + ">" + "<span>" + parsedMenus[i].name + "</span>" + "<span>" +"<i class='fas fa-times del-icon'>");
+          $("#category-ul-daily").append("<li id=" + newId + ">" + "<span>" + parsedMenus[i].name + "</span>" + "<span class='del-span'>" +"<i class='fas fa-times del-icon'>");
         }
 
         //여태껏 로컬에 있던 것 불러와서 menus(배열)로 만듦 -이유는 새로 추가하는 메뉴가 뒤로 들어가는 게 아니라, 덮어씌워지기 때문
@@ -461,12 +461,7 @@ function loadHistory(){
 
 
 
-
-
-
 }
-
-
 
 
 
@@ -484,6 +479,7 @@ function init(){
     }
 
     init();
+
 
 
     //페이지 부드럽게 이동

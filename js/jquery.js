@@ -99,17 +99,22 @@ var colorArray = [];
  
   function startSpin()
   {
-    
+
+    //0일 때 돌리려고 시도하면 룰렛에서 에러나더라
+    if(menusForGame.length !== 0){
+
       if (wheelSpinning == false) {
 
-          theWheel.startAnimation();
+        theWheel.startAnimation();
 
-          //결과 나올 때까지 시작버튼 눌러도 더 안돌아가게
-          wheelSpinning = true;
+        //결과 나올 때까지 시작버튼 눌러도 더 안돌아가게
+        wheelSpinning = true;
       }
+    }
 
-      //아무것도 안골랐을 때 고르라고 알러트
-      //지금은 아무것도 안고른 후> 스타트 누르고> 고르고> 스타트 누르면 안돌아감.. 오류 고치기
+    else{
+      alert("항목을 선택하세요.");
+    }
 
   }
 
@@ -180,7 +185,7 @@ var colorArray = [];
           name: parsedHistory[i].name
         }
 
-        todayMenus.unshift(historyObj);
+        todayMenus.push(historyObj);
       }
 
     }
