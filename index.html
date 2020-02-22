@@ -469,6 +469,18 @@ function loadHistory(){
 
 
 
+function gara(){
+  var historyArray = [
+    {"id":"200220","date":"02월 20일 (목)", "name":"어제새우"}, 
+    {"id":"200219","date":"02월 19일 (수)", "name":"그저께새우"}, 
+    {"id":"200218","date":"02월 18일 (화)", "name":"연습새우"}];
+
+
+  localStorage.setItem("todayHistory", JSON.stringify(historyArray));
+}
+
+
+
 
 
 function init(){
