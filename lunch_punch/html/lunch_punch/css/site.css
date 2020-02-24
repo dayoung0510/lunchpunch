@@ -75,6 +75,8 @@ section {
   align-items: flex-end;
 }
 
+.flex{display: flex;}
+
 
 .category{
   border: 1px solid #db3d2b;

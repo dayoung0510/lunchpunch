@@ -1,0 +1,103 @@
+<?php
+
+include('php/dbconfig.php');
+
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lunch Punch</title>
+
+
+  <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="css/site.css" rel="stylesheet">
+
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- 기본 js -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+
+
+  <!-- 룰렛 -->
+  <script type="text/javascript" src="js/Winwheel.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+
+  <style>
+    #page-top, .flex-center{height: 100%;}
+    .btn-orange{
+      margin: 0 20px;
+      width: 200px;
+      height: 100px;
+      border: none;
+      border-radius: .5rem;
+      background-color: #db3d2b;
+      outline: 0;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'silgothic';
+      letter-spacing: 2px;
+    }
+
+    .btn-orange:hover{
+      background-color: transparent;
+      color: #db3d2b;
+      border: 1px solid #db3d2b;
+    }
+
+    .btn-gray{
+      margin: 0 20px;
+      width: 200px;
+      height: 100px;
+      border: none;
+      border-radius: .5rem;
+      background-color: #444;
+      outline: 0;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'silgothic';
+      letter-spacing: 2px;
+    }
+
+    .btn-gray:hover{
+      background-color: transparent;
+      color: #444;
+      border: 1px solid #444;
+    }
+
+  </style>
+
+
+</head>
+
+<body id="page-top">
+
+
+  <div class="flex-center">
+    <button class="btn-orange" onclick="location.href='index_local.html'">LOCAL STORAGE</button>
+    <button class="btn-gray" onclick="location.href='index_mysql.php'">MYSQL</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
